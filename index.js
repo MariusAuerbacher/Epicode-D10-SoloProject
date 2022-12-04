@@ -251,6 +251,7 @@ Create a variable called test and assign a string value to it.
 
 */
 let test = "Today is Friday";
+console.log(test);
 
 /* EXERCISE B
 
@@ -258,6 +259,7 @@ Create a variable called sum and assign to it the result of the sum between the 
 
 */
 let sum = 10 + 20;
+console.log(sum);
 
 /* EXERCISE C
 
@@ -279,7 +281,8 @@ let me = {
   name: "Marius",
   surname: "Auerbacher",
   age: 32
-};
+}
+console.log(me);
 
 /* EXERCISE E
 
@@ -325,12 +328,16 @@ Write a function called whoIsBigger which receives 2 numbers as parameters and r
 
 */
 function whoIsBigger(anyNumber1, anyNumber2){
-  iAmBigger = Math.max( anyNumber1, anyNumber2);
+  if (anyNumber1 > anyNumber2){
+    console.log("the first number is bigger", anyNumber1)
+    return anyNumber1
+  } else {
+    console.log("the second number is bigger", anyNumber2)
+    return anyNumber2
+  }
  }
  whoIsBigger(100, 40)
- console.log(iAmBigger)
  
-
 /* EXERCISE 3
 
 Write a function called splitMe which receives a string as a parameter and returns an array with every word in that string.
@@ -531,12 +538,12 @@ Write a function called onlyInThisMillennium which returns only the movies produ
 
 */
 function onlyInThisMillennium() {
-  let milleniumYear = 2001
+  let milleniumYear = 2000
   let producedInThisMil = []
   for (i = 0; i < movies.length; i++) {
     let movieYear = Number(movies[i].Year)
     let movieTitle = movies[i].Title
-  if (movieYear > milleniumYear) {
+  if (movieYear >= milleniumYear) {
     producedInThisMil.push(movieTitle)
   }
   }
@@ -571,7 +578,15 @@ Write a function called sumAllTheYears which returns the sum of all the years in
 Write a function called searchByTitle which receives a string as a parameter and returns all the movies in the provided movies array which contain that string in the title.
 
 */
-
+function searchByTitle(stringInTitle){
+  for (i = 0; i < movies.length; i++) {
+    let movieTitle = movies[i].Title
+    if (movieTitle.indexOf(stringInTitle) >= 0) {  
+      console.log(movieTitle, movieTitle.indexOf(stringInTitle)) 
+    }
+    }
+}
+ console.log(searchByTitle("Avengers"));
 /* EXERCISE 19
 
 Write a function called searchAndDivide which receives a string as a parameter and returns an object;
@@ -581,13 +596,33 @@ this object should contain an array called match, made by all the movies from th
 and another array unmatch with all the remaining ones.
 
 */
-
+function searchAndDivide(stringInTitle){
+  let matchUnmatch = {
+    match: [],
+    unmatch: []
+  }
+  for (i = 0; i < movies.length; i++) {
+    let movieTitle = movies[i].Title
+    if (movieTitle.indexOf(stringInTitle) >= 0) {
+     matchUnmatch.match.push(movieTitle)
+    } else {
+     matchUnmatch.unmatch.push(movieTitle)
+    }
+  }
+  console.log(matchUnmatch)
+}
+  searchAndDivide("Lord");
 /* EXERCISE 20
 
 Write a function called "removeIndex" which receives a number as a parameter and returns the provided movies array without the element in the given position.
 
 */
-
+function removeIndex(numberIndex) {
+  delete movies[numberIndex]
+  console.log(movies)
+  return movies
+}
+removeIndex(0)
 // [EXTRAS] JS Advanced
 
 /* EXERCISE 21
